@@ -7,18 +7,15 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] float delayInSeconds = 4f;
 
-    int currentSceneIndex;
-
     // Start is called before the first frame update
     void Start()
     {
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(currentSceneIndex);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
         if (currentSceneIndex == 0)
         {
             StartCoroutine(WaitAndLoad());
         }
-
     }
 
     IEnumerator WaitAndLoad()
@@ -40,13 +37,15 @@ public class LevelLoader : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene(currentSceneIndex);
-        Debug.Log(currentSceneIndex);
         Time.timeScale = 1;
+
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
     
     public void LoadNextScene()
     {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
     
